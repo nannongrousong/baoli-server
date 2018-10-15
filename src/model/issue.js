@@ -1,5 +1,6 @@
 const dbHelper = require('../common/dbHelper');
 const errorInfo = require('../common/errorInfo');
+const { publicPath } = require('../config/global')
 
 const listIssue = async () => {
     try {
@@ -86,9 +87,28 @@ const editIssue = async ({ GroupID, IssueAppeal, IssueID, IssueNo, RectfyInfo, R
     }
 };
 
+const getPic = async (issueID) => {
+    let sql = 'select pic_url as PicUrl,type as PicType from tbl_issue_rela_pic where issue_id = ?'
+    let sqlParams = [issueID]
+
+    let data = await dbHelper.executeSql(sql, sqlParams)
+    let imageList = [];
+    let actualList = [];
+    data.forEach(item => {
+        item.PicUrl = publicPath + '/BAOLI/Attach/' + item.PicUrl;
+        item.PicType == 'image' ? imageList.push(item) : actualList.push(item);
+    })
+
+    return {
+        Image: imageList,
+        Actual: actualList
+    };
+}
+
 module.exports = {
     listIssue,
     addIssue,
     delIssue,
-    editIssue
+    editIssue,
+    getPic
 }

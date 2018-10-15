@@ -3,6 +3,17 @@ const router = express.Router();
 const issueM = require('../model/issue')
 const { getErrorInfo } = require('../common/utils');
 
+router.get('/Pic', async (req, res) => {
+    let { IssueID } = req.query;
+
+    try {
+        let Data = await issueM.getPic(IssueID);
+        res.json({ Code: true, Data });
+    } catch (err) {
+        res.json({ Code: false, Info: getErrorInfo(err) });
+    }
+})
+
 router.get('/', async (req, res) => {
     try {
         let Data = await issueM.listIssue();

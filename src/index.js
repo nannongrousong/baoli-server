@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const bodyParser = require('body-parser');
-const expressJwt = require('express-jwt');
 
 const server = http.createServer(app);
 const serverConfig = require('./config/global')
 const issueRouter = require('./routers/Issue')
 const groupRouter = require('./routers/Group')
+const attachRouter = require('./routers/Attach')
 
 const log4js = require('./common/log4js')
 
@@ -19,13 +19,6 @@ log4js.init(app);
 
 app.use(bodyParser.json());
 
-app.use(expressJwt({
-    secret: serverConfig.secret
-}).unless(req => (
-    req.originalUrl == '/Sys_Auth/CMS_Login' ||
-    (req.method == 'GET' && req.originalUrl.indexOf('/Attach') == 0)
-)));
-
 app.all('*', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -35,6 +28,7 @@ app.all('*', (req, res, next) => {
 
 app.use('/BAOLI/Issue', issueRouter)
 app.use('/BAOLI/Group', groupRouter)
+app.use('/BAOLI/Attach', attachRouter)
 
 
 app.get('/error', (req, res, next) => {
@@ -48,8 +42,6 @@ app.use((req, res) => {
 })
 
 app.use((err, req, res, next) => {
-    console.error(err);
-
     if (err.name === 'UnauthorizedError') {
         res.status(401).send({ Code: false, Info: 'TOKEN过期或丢失，请尝试重新登录！' });
     } else {

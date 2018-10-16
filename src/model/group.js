@@ -8,7 +8,7 @@ const addGroup = async (groupInfo) => {
     try {
         await dbHelper.executeSql('insert into tbl_issue_group(group_id, group_appeal) values(uuid(), ?)', sqlParams)
     } catch (err) {
-        throw new Error(errorInfo.DB_OPER_ERROR)
+        throw err || new Error(errorInfo.DB_OPER_ERROR);
     }
 };
 
@@ -19,7 +19,7 @@ const delGroup = async (userID) => {
     try {
         await dbHelper.executeSql(sql, sqlParams);
     } catch (err) {
-        throw new Error(errorInfo.DB_OPER_ERROR)
+        throw err || new Error(errorInfo.DB_OPER_ERROR)
     }
 };
 
@@ -30,7 +30,7 @@ const editGroup = async ({ GroupAppeal, GroupID }) => {
     try {
         await dbHelper.executeSql(sql, sqlParams);
     } catch (err) {
-        throw new Error(errorInfo.DB_OPER_ERROR)
+        throw err || new Error(errorInfo.DB_OPER_ERROR)
     }
 };
 

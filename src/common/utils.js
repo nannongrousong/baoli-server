@@ -55,12 +55,12 @@ const decryptData = (data) => (aesDecrypt(data, 'helloworld'));
 
 const getErrorInfo = (err) => (typeof err == 'string' ? err : (err.message || ''));
 
-const getUserIDByHeaders = (header) => {
+const getUserByHeaders = (header) => {
     const { authorization } = header;
     const token = authorization ? authorization.split(' ')[1] : '';
     const { secret } = serverConf;
-    const { userID } = jwt.verify(token, secret);
-    return userID;
+    const { LoginName } = jwt.verify(token, secret);
+    return LoginName;
 };
 
 module.exports = {
@@ -69,5 +69,5 @@ module.exports = {
     encryptData,
     decryptData,
     getErrorInfo,
-    getUserIDByHeaders
+    getUserByHeaders
 }

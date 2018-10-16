@@ -30,7 +30,7 @@ router.post('/', multipartMiddleware, async (req, res) => {
     }
 });
 
-router.get('/:path', async (req, res) => {    
+router.get('/:path', async (req, res) => {
     try {
         const { path } = req.params;
         res.sendFile(uploadDir + pathSep + path);
@@ -38,5 +38,17 @@ router.get('/:path', async (req, res) => {
         res.end(getErrorInfo(err));
     }
 })
+
+router.delete('/:path', async (req, res) => {
+    try {
+        const { path } = req.params;
+        console.log('path', path)
+        fs.unlinkSync(uploadDir + pathSep + path);
+        res.send({ Code: true })
+    } catch (err) {
+        res.send({ Code: false, Info: getErrorInfo(err) });
+    }
+})
+
 
 module.exports = router;

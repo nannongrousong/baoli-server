@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    serverPort: 81,
+    serverPort: 82,
     mysql: {
         host: '',
         user: '',

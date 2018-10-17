@@ -96,12 +96,10 @@ const editIssue = async ({ GroupID, IssueAppeal, IssueID, IssueNo, RectfyInfo, R
         params: [IssueNo, IssueAppeal, RectfyInfo, RectifyLastDate, IssueRemark, IssueState, IssueID]
     }]
 
-    if (ActualPic.length || ImagePic.length) {
-        sqlList.push({
-            sql: 'delete from tbl_issue_rela_pic where issue_id = ?',
-            params: [IssueID]
-        })
-    }
+    sqlList.push({
+        sql: 'delete from tbl_issue_rela_pic where issue_id = ?',
+        params: [IssueID]
+    })
 
     ActualPic.forEach(url => {
         sqlList.push({

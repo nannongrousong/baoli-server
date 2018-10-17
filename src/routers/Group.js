@@ -21,4 +21,14 @@ router.put('/', async (req, res) => {
     }
 })
 
+router.delete('/:groupID', async (req, res) => {
+    const { groupID } = req.params;
+    try {
+        await groupM.delGroup(groupID);
+        res.json({ Code: true });
+    } catch (err) {
+        res.json({ Code: false, Info: getErrorInfo(err) });
+    }
+})
+
 module.exports = router;

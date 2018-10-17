@@ -23,9 +23,9 @@ app.use(bodyParser.json());
 app.use(expressJwt({
     secret: serverConfig.secret
 }).unless(req => (
-    req.originalUrl == '/Login' ||
-    (req.originalUrl.indexOf('/Issue') == 0 && req.method == 'GET') ||
-    (req.originalUrl.indexOf('/Attach') == 0)
+    req.originalUrl.indexOf('/Login') != -1  ||
+    (req.originalUrl.indexOf('/Issue') != -1 && req.method == 'GET') ||
+    (req.originalUrl.indexOf('/Attach') != -1)
 )));
 
 app.all('*', (req, res, next) => {

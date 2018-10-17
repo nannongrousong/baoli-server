@@ -1,7 +1,8 @@
 const path = require('path');
+const debugMode = true;
 
 module.exports = {
-    serverPort: 82,
+    serverPort: 10002,
     mysql: {
         host: '',
         user: '',
@@ -10,9 +11,9 @@ module.exports = {
         database: ''
     },
     secret: 'abcdefgh12345678',
-    debugMode: true,
+    debugMode,
     homePath: path.resolve(__dirname, '../../'),
-    publicPath: 'http://localhost:81',
+    publicPath: debugMode ? 'http://localhost:10002' : 'https://nannongrousong.xin/baoli/api',
     //  用户重置密码
     defaultPwd: 'passok'
 }

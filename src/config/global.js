@@ -1,5 +1,4 @@
 const path = require('path');
-const debugMode = true;
 
 module.exports = {
     serverPort: 10002,
@@ -10,10 +9,9 @@ module.exports = {
         port: '',
         database: ''
     },
-    secret: 'abcdefgh12345678',
-    debugMode,
+    secret: '',
     homePath: path.resolve(__dirname, '../../'),
-    publicPath: debugMode ? 'http://localhost:10002' : 'https://nannongrousong.xin/baoli/api',
+    publicPath: (process.env.NODE_ENV == 'devlopment') ? 'http://localhost:10002' : 'https://nannongrousong.xin/baoli/api',
     //  用户重置密码
     defaultPwd: 'passok'
 }

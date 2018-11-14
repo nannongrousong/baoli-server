@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const userM = require('../model/user')
+const userM = require('../service/user')
 const { getErrorInfo } = require('../common/utils');
 const jwt = require('jsonwebtoken');
 const { secret } = require('../config/global');

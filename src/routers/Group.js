@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const groupM = require('../model/group')
+const groupM = require('../service/group')
 const { getErrorInfo } = require('../common/utils');
 
 router.post('/', async (req, res) => {

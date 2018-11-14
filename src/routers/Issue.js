@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const issueM = require('../model/issue')
+const issueM = require('../service/issue')
 const { getErrorInfo } = require('../common/utils');
 
 router.get('/Pic', async (req, res) => {
